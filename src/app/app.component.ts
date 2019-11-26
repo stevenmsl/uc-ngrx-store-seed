@@ -9,8 +9,8 @@ import { PizzasService, ToppingsService } from "./products/services";
 export class AppComponent {
   title = "uc-ngrx-store";
 
-  /*
   //Verify if the in-memory-data service works
+  /*
   constructor(
     private pizzasService: PizzasService,
     private toppingsService: ToppingsService

@@ -16,7 +16,7 @@ import { PizzasService } from "../../services";
         <div *ngIf="!pizzas?.length">
           No pizzas, add one to get started.
         </div>
-        <pizza-item *mgFor="let pizza of pizzas" [pizza]="pizza"> </pizza-item>
+        <pizza-item *ngFor="let pizza of pizzas" [pizza]="pizza"> </pizza-item>
       </div>
     </div>
   `

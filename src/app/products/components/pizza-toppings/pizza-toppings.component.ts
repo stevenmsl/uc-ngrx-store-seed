@@ -1,11 +1,23 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
-import { ControlValueAccessor } from "@angular/forms";
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  forwardRef
+} from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Topping } from "../../models/topping.model";
+
+const PIZZA_TOPPINGS_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => PizzaToppingsComponent),
+  multi: true
+};
 
 @Component({
   selector: "pizza-toppings",
-  providers: [],
+  providers: [PIZZA_TOPPINGS_ACCESSOR],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ["pizza-toppings.component.scss"],
   template: `
     <div class="pizza-toppings">
       <div

@@ -6,7 +6,7 @@ export const DROP_ANIMATION = trigger("drop", [
   transition(":enter", [
     style({ transform: "translateY(-200px)", opacity: 0 }),
     animate(
-      "300ms cubic-beizer(1.000, 0.000, 0.000, 1.000)",
+      "300ms cubic-bezier(1.000, 0.000, 0.000, 1.000)",
       style({ transform: "translateY(0)", opacity: 1 })
     )
   ]),
@@ -29,7 +29,7 @@ export const DROP_ANIMATION = trigger("drop", [
       <div class="pizza-display__base">
         <img src="../../../../assets/img/pizza.svg" />
         <img
-          *ngFor="let topping of pizza?toppings; index as i;"
+          *ngFor="let topping of pizza?.toppings; index as i"
           src="../../../../assets/img/toppings/{{ topping.name }}.svg"
           [style.zIndex]="i"
           class="pizza-display__topping"

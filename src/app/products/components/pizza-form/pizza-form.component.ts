@@ -37,11 +37,19 @@ export class PizzaFormComponent implements OnChanges {
   @Output() remove = new EventEmitter<Pizza>();
 
   form = this.fb.group({
-    name: ["", Validators.required],
-    toppings: [[]]
+    toppings: [[]],
+    name: ["", Validators.required]
   });
 
   constructor(private fb: FormBuilder) {}
+
+  get nameControl() {
+    return this.form.get("name") as FormControl;
+  }
+
+  get nameControlInvalid() {
+    return this.nameControl.hasError("required") && this.nameControl.touched;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.pizza && this.pizza.id) {
@@ -54,14 +62,6 @@ export class PizzaFormComponent implements OnChanges {
         map(toppings => toppings.map((topping: Topping) => topping.id))
       )
       .subscribe(value => this.selected.emit(value));
-  }
-
-  get nameControl() {
-    return this.form.get("name") as FormControl;
-  }
-
-  get nameControlInvalid() {
-    return this.nameControl.hasError("required") && this.nameControl.touched;
   }
 
   createPizza(form: FormGroup) {
