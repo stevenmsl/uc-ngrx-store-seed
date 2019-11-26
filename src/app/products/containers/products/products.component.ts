@@ -11,6 +11,11 @@ import { PizzasService } from "../../services";
         <a class="btn btn__ok" routerLink="./new">
           New Pizza
         </a>
+        <!--
+        <button type="button" class="btn btn__ok" (click)="test()">
+          Test
+        </button>
+        -->
       </div>
       <div class="products__list">
         <div *ngIf="!pizzas?.length">
@@ -28,6 +33,11 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.pizzaService.getPizzas().subscribe(pizzas => {
       this.pizzas = pizzas;
+    });
+  }
+  test() {
+    this.pizzaService.getPizzas().subscribe(pizzas => {
+      console.log(pizzas);
     });
   }
 }

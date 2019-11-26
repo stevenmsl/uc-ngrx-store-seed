@@ -10,6 +10,8 @@ import * as fromContainers from "./containers";
 // services
 import * as fromServices from "./services";
 import { from } from "rxjs";
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { InMemoryDataService } from "../in-memory-data.service";
 
 // routes
 export const ROUTES: Routes = [
@@ -32,7 +34,17 @@ export const ROUTES: Routes = [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    /*
+      You must import it here using forFeature method so 
+      that the http requests can be property intercepted 
+      for the service calls originated from the components resided in the module.
+    */
+    HttpClientInMemoryWebApiModule.forFeature(InMemoryDataService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+      put204: false //return entity
+    })
   ],
   providers: [...fromServices.services],
   declarations: [...fromContainers.containers, ...fromComponents.components],

@@ -8,13 +8,11 @@ import { Observable } from "rxjs";
 import { Pizza } from "../models/pizza.model";
 import { catchError } from "rxjs/operators";
 
-/*
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
   })
 };
-*/
 
 @Injectable()
 export class PizzasService {
@@ -27,7 +25,7 @@ export class PizzasService {
 
   getPizzas(): Observable<Pizza[]> {
     return this.http
-      .get<Pizza[]>(this.pizzasUrl)
+      .get<Pizza[]>(this.pizzasUrl, httpOptions)
       .pipe(catchError(this.handleError<Pizza[]>("getPizzas", [])));
   }
 

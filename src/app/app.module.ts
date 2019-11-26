@@ -16,23 +16,21 @@ import { ProductsModule } from "./products/products.module";
 // not used in production
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { storeFreeze } from "ngrx-store-freeze";
+import { ProductsComponent } from "./products/containers";
 
 export const metaReducers: MetaReducer<any>[] = [storeFreeze];
-
-//routes
-export const ROUTES: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "products" },
-  {
-    path: "products",
-    loadChildren: "./products/products.module#ProductsModule"
-  }
-];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    //Uncomment it if you want to verify if the in-memory-data service works separately
+    //ProductsModule
+    FormsModule,
+
+    StoreModule.forRoot({}, { metaReducers }),
+    HttpClientModule,
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -42,13 +40,7 @@ export const ROUTES: Routes = [
       passThruUnknownUrl: true,
       put204: false //return entity
     }),
-    RouterModule.forRoot(ROUTES),
-    StoreModule.forRoot({}, { metaReducers }),
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    //Uncomment it if you want to verify if the in-memory-data service works separately
-    ProductsModule
+    AppRoutingModule
   ],
   providers: [HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
